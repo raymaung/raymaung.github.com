@@ -4,7 +4,7 @@
   <title><![CDATA[Raymond on Everything]]></title>
   <link href="http://raymaung.github.io/atom.xml" rel="self"/>
   <link href="http://raymaung.github.io/"/>
-  <updated>2013-04-28T18:18:00+10:00</updated>
+  <updated>2013-04-28T23:37:24+10:00</updated>
   <id>http://raymaung.github.io/</id>
   <author>
     <name><![CDATA[Raymond Maung]]></name>
@@ -12,5 +12,109 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Octopress Up And Running]]></title>
+    <link href="http://raymaung.github.io/blog/2013/04/28/getting-octopress-up-and-running/"/>
+    <updated>2013-04-28T18:27:00+10:00</updated>
+    <id>http://raymaung.github.io/blog/2013/04/28/getting-octopress-up-and-running</id>
+    <content type="html"><![CDATA[<p><em><a href="http://octopress.org/">Octopress</a></em> is a framework designed for Jekyll, the static blogging engine powering Github Pages. It sits on top of <a href="https://github.com/mojombo/jekyll">Jekyll</a> and generate <strong>static</strong> html pages from <em>markdown</em> files. It comes with a set of useful <em>rake tasks</em> to <em>preview</em>, <em>deploy</em> pages.</p>
+
+<p>The best part is it comes with rake task to have <code>_deploy</code> folder set up as <em>git</em> sub module that is setup as seperate git repo - it is particular useful when pushing to git pages.</p>
+
+<h2>Setting up locally</h2>
+
+<p><a href="http://octopress.org/docs/setup/">Octopress Setup</a></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># clone octopress</span>
+</span><span class='line'><span class="n">git</span> <span class="nb">clone</span> <span class="ss">git</span><span class="p">:</span><span class="sr">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">imathis</span><span class="o">/</span><span class="n">octopress</span><span class="o">.</span><span class="n">git</span> <span class="n">octopress</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># install gems</span>
+</span><span class='line'><span class="n">cd</span> <span class="n">octopress</span>
+</span><span class='line'><span class="n">gem</span> <span class="n">install</span> <span class="n">bundler</span>
+</span><span class='line'><span class="n">bundle</span> <span class="n">install</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># install default octopress theme</span>
+</span><span class='line'><span class="n">rake</span> <span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>About GitHub pages</h3>
+
+<p>GitHub pages a free static web pages hosting provided by GitHub - requires GitHub account.</p>
+
+<ul>
+<li>Setting up GitHub pages
+
+<ul>
+<li>Check out GitHub on how to set up Git Hub Pages for more details.</li>
+<li>create a <em>git</em> repo named <code>{your_git_hub_account_name_here}.github.com</code></li>
+<li>pushing any static html page will be accessible as web pages at <code>http://{your_git_hub_account_name_here}.github.io/</code></li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># setting up for github pages</span>
+</span><span class='line'><span class="c1"># See More on &#39;About GitHub Pages&#39;</span>
+</span><span class='line'><span class="c1"># - create a forked version of octopress for the purpose of version controlling the octopres</span>
+</span><span class='line'><span class="c1"># - Update the octopress/.git/config</span>
+</span><span class='line'><span class="c1">#   - Ask for a git repo url for the project (not the git hub pages)</span>
+</span><span class='line'><span class="c1">#   - rename origin to octopress</span>
+</span><span class='line'><span class="c1">#     - the changes are not really the octopress core development, so no need for keeping origin</span>
+</span><span class='line'><span class="c1">#   - add origin to point to the git repo url from the earlier step</span>
+</span><span class='line'><span class="n">rake</span> <span class="n">setup_github_pages</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Useful things to know about Octopress</h2>
+
+<ul>
+<li><code>_deploy</code>: where the <em>github pages repo</em> as sub module - see <code>_deploy/.git/config</code></li>
+<li><code>source</code>: where the generated content goes</li>
+</ul>
+
+
+<h2>Recommended Workflow</h2>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Create new post</span>
+</span><span class='line'><span class="n">rake</span> <span class="n">new_post</span><span class="o">[</span><span class="s2">&quot;this is my first blog&quot;</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Edit generated initial the markdown file</span>
+</span><span class='line'><span class="n">vi</span> <span class="n">source</span><span class="o">/</span><span class="n">_posts</span><span class="o">/</span><span class="mi">20</span><span class="n">xx</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="o">-</span><span class="n">this</span><span class="o">-</span><span class="n">is</span><span class="o">-</span><span class="n">my</span><span class="o">-</span><span class="n">first</span><span class="o">-</span><span class="n">blog</span><span class="o">.</span><span class="n">markdown</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Deploy to GitHub page</span>
+</span><span class='line'><span class="n">rake</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
 </feed>
