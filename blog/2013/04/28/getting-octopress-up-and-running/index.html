@@ -177,6 +177,13 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Create new post</span>
 </span><span class='line'><span class="n">rake</span> <span class="n">new_post</span><span class="o">[</span><span class="s2">&quot;this is my first blog&quot;</span><span class="o">]</span>
 </span><span class='line'>
@@ -184,7 +191,14 @@
 </span><span class='line'><span class="n">vi</span> <span class="n">source</span><span class="o">/</span><span class="n">_posts</span><span class="o">/</span><span class="mi">20</span><span class="n">xx</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="o">-</span><span class="n">this</span><span class="o">-</span><span class="n">is</span><span class="o">-</span><span class="n">my</span><span class="o">-</span><span class="n">first</span><span class="o">-</span><span class="n">blog</span><span class="o">.</span><span class="n">markdown</span>
 </span><span class='line'>
 </span><span class='line'><span class="c1"># Deploy to GitHub page</span>
-</span><span class='line'><span class="n">rake</span>
+</span><span class='line'><span class="c1"># - commit and push github submodule in _deploy</span>
+</span><span class='line'><span class="n">rake</span> <span class="n">gen_deploy</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Commit the new markdown file</span>
+</span><span class='line'><span class="n">git</span> <span class="n">add</span> <span class="n">source</span><span class="o">/*</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Push</span>
+</span><span class='line'><span class="n">git</span> <span class="n">push</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
