@@ -163,7 +163,12 @@
 
 <ul>
 <li><code>_deploy</code>: where the <em>github pages repo</em> as sub module - see <code>_deploy/.git/config</code></li>
-<li><code>source</code>: where the generated content goes</li>
+<li><code>source</code>: where the generated content by octopress to be further process by <em>Jekyll</em>. (??)
+
+<ul>
+<li><code>source/_post</code>: where the markdown files goes</li>
+</ul>
+</li>
 </ul>
 
 
@@ -197,8 +202,8 @@
 </span><span class='line'><span class="c1"># Commit the new markdown file</span>
 </span><span class='line'><span class="n">git</span> <span class="n">add</span> <span class="n">source</span><span class="o">/*</span>
 </span><span class='line'>
-</span><span class='line'><span class="c1"># Push</span>
-</span><span class='line'><span class="n">git</span> <span class="n">push</span>
+</span><span class='line'><span class="c1"># Push the source branch</span>
+</span><span class='line'><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">source</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
