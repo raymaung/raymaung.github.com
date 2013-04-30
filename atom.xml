@@ -4,7 +4,7 @@
   <title><![CDATA[Raymond on Everything]]></title>
   <link href="http://raymaung.github.io/atom.xml" rel="self"/>
   <link href="http://raymaung.github.io/"/>
-  <updated>2013-04-29T00:15:13+10:00</updated>
+  <updated>2013-05-01T00:05:02+10:00</updated>
   <id>http://raymaung.github.io/</id>
   <author>
     <name><![CDATA[Raymond Maung]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrant for Rails Application Development]]></title>
+    <link href="http://raymaung.github.io/blog/2013/04/29/vagrant-for-rails-application-development/"/>
+    <updated>2013-04-29T08:15:00+10:00</updated>
+    <id>http://raymaung.github.io/blog/2013/04/29/vagrant-for-rails-application-development</id>
+    <content type="html"><![CDATA[<p>Having been using rails development on Mac book natively, I&#8217;ve been wanting to do rails development on Windows-based Desktop. But, anyone trying to set up Rails development environment on Windows is a pain and it is not really worth it, given the production will be running on *nix environment. I find the attempt just silly; I admit it was a good exercise but just a waste of time.</p>
+
+<p>I&#8217;ve experimented a bit with Vagrant in 2010, but never really attempt to integrate it as part of my normaly daily life. Now in 2013, I thought it is time to start using Vagrant seriously and it will not ony allowing me to develop Rails on Windows Desktop also, it will help me keep the Mac box clean.</p>
+
+<p>Here are the attempts just hoping to <em>work</em> but like any piece of software, nothing works as expected.</p>
+
+<h2>rails-dev-box</h2>
+
+<p>First attempt, <em><a href="https://github.com/rails/rails-dev-box">rails-dev-box</a></em>, it is called <em>rails-dev-box</em>, it sounds like a box for Rails developer - <em>application</em> that is. It seems to work fine with setting up db, libs and packages. After getting stuck with trying to configure Postgre for a few hours, (confession, I am not very well versed with *nix command lines and not very familiar with Postres set up in general), I eventualy realize the box is for Rails <strong>core</strong> development, not <strong>application</strong>.</p>
+
+<p>While, other have success with using as application development, I just decided not to spend any more time on it.</p>
+
+<h3>Isssues I run into</h3>
+
+<ul>
+<li>PostreSql
+
+<ul>
+<li><p>finding <code>pg_ctl</code></p>
+
+<ul>
+<li>path not in the <code>$PATH</code></li>
+<li>should add <code>PATH=$PATH:/usr/lib/postgresql/9.1/bin</code> to <code>.bashrc</code></li>
+</ul>
+</li>
+<li><p>initializing database</p>
+
+<ul>
+<li><code>sudo -u postgres initdb /usr/local/var/postgres</code></li>
+<li>permission issues at <code>/usr/local/var/postgres</code>
+
+<ul>
+<li>need to give <em>postgres</em> permission (?)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>rails-starter-box</h2>
+
+<p>Second attempt. Somewhere in the <em>rails-dev-box</em> community, some body recommends that <a href="https://github.com/amaia/rails-starter-box"><em>rails-starter-box</em></a> be better choice. Using <code>puppet</code> submodule as <code>puppet</code> receipes to set up and configure software; database, git, rvm and ete, was nice. Arm with basic understanding of Puppet, I was able to navigate the files and poke around.</p>
+
+<h3>Issues</h3>
+
+<ul>
+<li>RVM installation; possibly due to puppet limitation on binding, the Vagrant up was not as smooth as I hope for. But thanks to their read me I had to write some puppet code to add <code>$rvm_installed == "true"</code> conditional check;
+
+<ul>
+<li><code>$rvm_installed</code> is basically a flag in the Puppet set file and detect if <em>RVM</em> is installed. The trouble is the flag <strong>is not</strong> re-bound after Puppet installed <em>RVM</em>. That causes a lot of issues because <code>Ruby</code> and its gem installation setup were relying on the fact that <em>RVM</em> is installed.</li>
+<li>Workaround, by adding the conditional check where <strong>Ruby</strong> and <em><strong>Gem</strong> setup, not to proceed at all, and run <code>vagrant up</code> second time after </em>first* run to have <strong>RVM</strong> installed.</li>
+</ul>
+</li>
+<li><code>Node.js</code> or a <code>JavaScript</code> engine does not come with the puppet setup; had to manually installed it with help from <em><a href="http://askubuntu.com/questions/49390/how-do-i-install-the-latest-version-of-node-js">how-do-i-install-the-latest-version-of-node-js</a></em></li>
+<li><code>bundle install</code> is finally success for a rails app. The app is finally up and running, but issues with running tests.
+
+<ul>
+<li><code>rspec</code> is having some issues with database unicode setup or what not. Trying to <code>createdb</code> and <code>dropdb</code> and etc. Everything seems be fine excep rspec continue complaining.</li>
+</ul>
+</li>
+<li>Postgre version is a bit dated; defaulted to <code>9.1</code>. I wanted <code>9.2</code>, Tried changing <em>params</em> to 9.2 but didn&#8217;t work, complainning issues related to <code>pg_hba.conf.erb</code>. I don&#8217;t really know but so I gave up at this point.</li>
+</ul>
+
+
+<p>After many hours, I finally start thinking about finding another solution. Good news is the app can run but not test.</p>
+
+<h2>using <a href="http://rove.io/">http://rove.io/</a></h2>
+
+<p>Unlike previous attempts, <code>http://rove.io/</code> can generate Vagrant files and chef according to your need; as opposed to ready made one size fit all box. It is great for me as I know exactly what I need in the box and what I don&#8217;t care. However, I have never touch <code>chef</code>.</p>
+
+<p>After following its instructions, it works flawlessly; in addtional to having <code>vagrant</code> installed on the host, need to run</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install librarian-chef
+</span><span class='line'>install `librarian-chef install`</span></code></pre></td></tr></table></div></figure>
+
+
+<p>to install Chef, I supposed. Then <code>vagrant up</code>, success.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Getting Octopress Up And Running]]></title>
