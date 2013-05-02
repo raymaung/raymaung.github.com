@@ -4,7 +4,7 @@
   <title><![CDATA[Raymond on Everything]]></title>
   <link href="http://raymaung.github.io/atom.xml" rel="self"/>
   <link href="http://raymaung.github.io/"/>
-  <updated>2013-05-01T00:05:02+10:00</updated>
+  <updated>2013-05-02T22:37:22+10:00</updated>
   <id>http://raymaung.github.io/</id>
   <author>
     <name><![CDATA[Raymond Maung]]></name>
@@ -91,7 +91,7 @@
 
 <p>Unlike previous attempts, <code>http://rove.io/</code> can generate Vagrant files and chef according to your need; as opposed to ready made one size fit all box. It is great for me as I know exactly what I need in the box and what I don&#8217;t care. However, I have never touch <code>chef</code>.</p>
 
-<p>After following its instructions, it works flawlessly; in addtional to having <code>vagrant</code> installed on the host, need to run</p>
+<p>After following its instructions; in addtional to having <code>vagrant</code> installed on the host, need to run</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -99,7 +99,17 @@
 </span><span class='line'>install `librarian-chef install`</span></code></pre></td></tr></table></div></figure>
 
 
-<p>to install Chef, I supposed. Then <code>vagrant up</code>, success.</p>
+<p>to install Chef, I supposed. Then <code>vagrant up</code>. No luck working.</p>
+
+<p>With zero knowledge of how Chef works, it installed packages but a lot of info in the log file.</p>
+
+<h3>Issues (still sorting out - on the verge of giving up)</h3>
+
+<ul>
+<li><code>rvm</code> is not install while the log appear to be installed</li>
+<li>Issues with starting up <code>mongodb</code> that has been already started.</li>
+</ul>
+
 ]]></content>
   </entry>
   
